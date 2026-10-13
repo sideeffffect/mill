@@ -110,6 +110,10 @@ trait MillStableJavaModule extends MillPublishJavaModule with Mima {
     // new override calling super, with default impl: adds the WIT bindings to generatedSources
     ProblemFilter.exclude[ReversedMissingMethodProblem](
       "mill.scalajslib.ScalaJSModule.mill$scalajslib$ScalaJSModule$$super$generatedSources"
+    ),
+    // new override calling super, with default impl: adds the Scala.js test bridge to the dependencies
+    ProblemFilter.exclude[ReversedMissingMethodProblem](
+      "mill.scalajslib.TestScalaJSModule.mill$scalajslib$TestScalaJSModule$$super$mandatoryMvnDeps"
     )
   )
 
