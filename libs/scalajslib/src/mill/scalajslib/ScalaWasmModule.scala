@@ -16,6 +16,7 @@ import mill.scalajslib.api.*
  *  - [[moduleKind]]: [[ModuleKind.WasmComponent]]
  *  - [[scalaJSUseWebAssembly]]: `true`
  *  - [[esFeatures]]: ES2022
+ *  - [[jsEnvConfig]]: [[JsEnvConfig.Wasmtime]], to `run` and `test` the component
  *
  * It also generates Scala bindings from the WIT files in [[witDirectory]] (`wit/`),
  * with [[https://github.com/scala-wasm/wit-bindgen-scala wit-bindgen-scala]].
@@ -51,6 +52,9 @@ trait ScalaWasmModule extends ScalaJSModule {
   override def esFeatures: T[ESFeatures] = Task {
     super.esFeatures().withESVersion(ESVersion.ES2022)
   }
+
+  /** A component runs on [[https://wasmtime.dev wasmtime]], not on a JavaScript engine */
+  override def jsEnvConfig: T[JsEnvConfig] = Task { JsEnvConfig.Wasmtime() }
 
   /**
    * Directory with the WIT files (WebAssembly Component Model interfaces) to generate
