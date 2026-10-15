@@ -97,12 +97,6 @@ private[scalajslib] class ScalaJSWorker(jobs: Int)
           args = config.args,
           env = config.env
         )
-      case config: api.JsEnvConfig.Wasmtime =>
-        workerApi.JsEnvConfig.Wasmtime(
-          executable = config.executable,
-          args = config.args,
-          env = config.env
-        )
       case config: api.JsEnvConfig.Phantom =>
         workerApi.JsEnvConfig.Phantom(
           executable = config.executable,
